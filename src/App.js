@@ -1,4 +1,6 @@
 import React from "react";
+import { Button, Card, Elevation } from "@blueprintjs/core";
+
 import "./App.css";
 
 class Square extends React.Component {
@@ -79,8 +81,22 @@ class Game extends React.Component {
 
 function App() {
   return (
-    <div className="App">
-      <Game />
+    <div className="appContainer">
+      <div className="cardContainer">
+        <Card interactive={true} elevation={Elevation.ONE} className="grow">
+          <h1>
+            <a href="https://reactjs.org/tutorial/tutorial.html">
+              Intro to React & BlueprintJS
+            </a>
+          </h1>
+          <p className="paragraphPadding">
+            React tutorial practicing the fundamental concepts of layout, props,
+            state, and child to parent relationships via creation of a
+            tic-tac-toe game.
+          </p>
+          <Button icon="star" text="Begin Game" intent="success" />
+        </Card>
+      </div>
     </div>
   );
 }
