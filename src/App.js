@@ -1,7 +1,4 @@
 /*
-TODO: Display the location for each move in the format (col, row) in the move history list.
-TODO: Bold the currently selected item in the move list.
-TODO: Add a toggle button that lets you sort the moves in either ascending or descending order.
 TODO: When someone wins, highlight the three squares that caused the win.
 TODO: When no one wins, display a message about the result being a draw.
 */
@@ -60,7 +57,8 @@ class Game extends React.Component {
     this.state = {
       history: [{ squares: Array(9).fill(null) }],
       xIsNext: true,
-      stepNumber: 0
+      stepNumber: 0,
+      isDescending: true
     };
   }
 
@@ -105,6 +103,12 @@ class Game extends React.Component {
     });
   }
 
+  sortHistory() {
+    this.setState({
+      isDescending: !this.state.isDescending
+    });
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -134,7 +138,10 @@ class Game extends React.Component {
       <div className="game">
         <div className="game-info">
           <div>{status}</div>
-          <ol>{moves}</ol>
+          <ol>{this.state.isDescending ? moves : moves.reverse()}</ol>
+          <Button onclick={() => this.sortHistory()}>
+            Sort by: {this.state.isDescending ? "Descending" : "Ascending"}
+          </Button>
         </div>
         <div className="game-board">
           <Board squares={current.squares} onClick={i => this.handleClick(i)} />
