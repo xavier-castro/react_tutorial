@@ -65,3 +65,7 @@ button:focus {
   padding: 30px;
   margin: 10px;
 }
+
+.game-info {
+  background-color: red;
+}
