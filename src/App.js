@@ -1,7 +1,6 @@
 /*
 TODO: Display the location for each move in the format (col, row) in the move history list.
 TODO: Bold the currently selected item in the move list.
-TODO: Rewrite Board to use two loops to make the squares instead of hardcoding them.
 TODO: Add a toggle button that lets you sort the moves in either ascending or descending order.
 TODO: When someone wins, highlight the three squares that caused the win.
 TODO: When no one wins, display a message about the result being a draw.
@@ -24,33 +23,33 @@ function Square(props) {
 class Board extends React.Component {
   renderSquare(i) {
     return (
-      // We are now passing 2 props from Board to Square: (1): value and (2): onClick
       <Square
+        key={"square " + i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
       />
     );
   }
 
+  renderSquares(n) {
+    let squares = [];
+    for (let i = n; i < n + 3; i++) {
+      squares.push(this.renderSquare(i));
+    }
+    return squares;
+  }
+
+  renderRows(i) {
+    return <div className="board-row">{this.renderSquares(i)}</div>;
+  }
+
   render() {
     return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
+      <diiv>
+        {this.renderRows(0)}
+        {this.renderRows(3)}
+        {this.renderRows(6)}
+      </diiv>
     );
   }
 }
