@@ -69,3 +69,12 @@ button:focus {
 .game-info {
   background-color: red;
 }
+
+.winningSquare {
+  background-color: greenyellow;
+}
+
+.square {
+  background-color: blue;
+  color: palegreen;
+}
