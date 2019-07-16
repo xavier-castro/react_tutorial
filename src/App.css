@@ -18,10 +18,17 @@ button:focus {
   outline: 0;
 }
 
+.center {
+  margin: 0 auto;
+}
+
 .appContainer {
   height: 100%;
   width: 100%;
   background-image: linear-gradient(to top, #30404d, #232a30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .popoverButtonContainer {
@@ -34,9 +41,8 @@ button:focus {
 .cardContainer {
   display: flex;
   height: 100%;
-  width: 60%;
+  width: 80%;
   max-width: 600px;
-  margin: 0 auto;
   justify-content: center;
   align-items: center;
 }
@@ -45,8 +51,17 @@ button:focus {
   padding-bottom: 60px;
 }
 
-.grow:hover {
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
+.game {
+  background-color: #e4e4e4;
+  display: flex;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: row;
+}
+
+.game-board {
+  padding: 30px;
+  margin: 10px;
 }
