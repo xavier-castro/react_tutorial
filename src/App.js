@@ -1,19 +1,37 @@
-/*
-TODO: When someone wins, highlight the three squares that caused the win.
-TODO: When no one wins, display a message about the result being a draw.
-*/
-
 import React from "react";
 import { Button, Card, Elevation } from "@blueprintjs/core";
 
 import "./App.css";
 
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return { player: squares[a], line: [a, b, c] };
+    }
+  }
+  return null;
+}
+
 // The Square component is now considered a coontrolled component because the Board has full control over it
 function Square(props) {
   return (
-    <Button className="square" onClick={props.onClick}>
+    <button
+      className={"square " + (props.isWinning ? "winningSquare" : "")}
+      onClick={props.onClick}
+    >
       {props.value}
-    </Button>
+    </button>
   );
 }
 
@@ -21,6 +39,7 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        isWinning={this.props.winningSquares.includes(i)}
         key={"square " + i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
@@ -42,11 +61,11 @@ class Board extends React.Component {
 
   render() {
     return (
-      <diiv>
+      <div className="boardContainer">
         {this.renderRows(0)}
         {this.renderRows(3)}
         {this.renderRows(6)}
-      </diiv>
+      </div>
     );
   }
 }
@@ -139,13 +158,14 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div className="game-info">
-          <div>{status}</div>
           <ol>{this.state.isDescending ? moves : moves.reverse()}</ol>
-          <Button onclick={() => this.sortHistory()}>
-            Sort by: {this.state.isDescending ? "Descending" : "Ascending"}
-          </Button>
+          <Button
+            onclick={() => this.sortHistory()}
+            icon={this.state.isDescending ? "sort-desc" : "sort-asc"}
+          />
         </div>
         <div className="game-board">
+          <div className="statusStyle">{status}</div>
           <Board
             winningSquares={winner ? winner.line : []}
             squares={current.squares}
@@ -178,25 +198,4 @@ function App() {
     </div>
   );
 }
-
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return { player: squares[a], line: [a, b, c] };
-    }
-  }
-  return null;
-}
-
 export default App;

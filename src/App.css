@@ -14,8 +14,9 @@ div#root {
   height: 100%; /* remove this line to see div.app is no more 100% height */
 }
 
-button:focus {
+button:focus button:active {
   outline: 0;
+  color: red;
 }
 
 .center {
@@ -29,6 +30,17 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.board-row {
+  margin: 10px;
+}
+
+.boardContainer {
+  background-color: orange;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
 }
 
 .popoverButtonContainer {
@@ -68,6 +80,8 @@ button:focus {
 
 .game-info {
   background-color: red;
+  align-items: flex-start;
+  padding: 20px;
 }
 
 .winningSquare {
@@ -75,6 +89,14 @@ button:focus {
 }
 
 .square {
-  background-color: blue;
-  color: palegreen;
+  background-color: white;
+  color: black;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 1em;
+}
+
+.statusStyle {
+  margin-bottom: 10px;
 }
